@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // ! Routing
-app.use("/", require("./routes/listRoute"));
-app.use("/lists", require("./routes/taskRoute"));
+app.use("/dashboard", require("./routes/listRoute"));
+app.use("/dashboard/lists", require("./routes/taskRoute"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
