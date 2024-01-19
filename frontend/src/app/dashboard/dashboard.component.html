@@ -10,8 +10,22 @@
 </head>
 
 <body>
-  
+  <h1 class="text-center">My Frontend</h1>
+  <div class="container-fluid">
+    <ng-container *ngFor="let list of lists">
+      <button class="btn btn-primary m-3" type="button" [routerLink]="['/dashboard/lists',list._id]">
+        {{list.title}}
+      </button>
+    </ng-container>
+  </div>
 
+  <div class="container-fluid">
+    <h3 *ngIf="tasks.length>0">Tasks</h3>
+    <button *ngFor="let task of tasks" class="btn btn-secondary d-block m-3" (click)="onTaskClick(task)"
+      [style.color]="task.completed ? 'red' :'white'">
+      {{task.title}}
+    </button>
+  </div>
 </body>
 
 </html>

@@ -10,22 +10,22 @@ export class TaskService {
   constructor(private webService: WebApiService) { }
 
   public getLists() {
-    return this.webService.get("lists");
+    return this.webService.get("dashboard/lists");
   }
 
   public createList(title: string) {
-    return this.webService.post("lists", { title });
+    return this.webService.post("dashboard/lists", { title });
   }
 
   public getTasks(listId: string) {
-    return this.webService.get(`lists/${listId}/tasks`);
+    return this.webService.get(`dashboard/lists/${listId}/tasks`);
   }
   public createTask(listId: string, title: string) {
-    return this.webService.post(`lists/${listId}/tasks`, { title });
+    return this.webService.post(`dashboard/lists/${listId}/tasks`, { title });
   }
 
   public deleteList(listId: string) {
-    return this.webService.delete(`lists/${listId}`)
+    return this.webService.delete(`dashboard/lists/${listId}`)
   }
 
   public deleteTask(listId: string, taskId: string) {
