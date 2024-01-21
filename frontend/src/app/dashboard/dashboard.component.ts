@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TaskService } from '../task.service';
 import List from '../models/list';
 import Task from '../models/task';
+import { items } from './dashboard';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,6 +13,21 @@ export class DashboardComponent implements OnInit{
   lists: List[] = [];
   tasks: Task[] = [];
   listId: string = "";
+
+  dashboardItems: items[] = [
+    {
+      icon: "fa-regular fa-sun",
+      name: "Daily",
+    },
+    {
+      icon: "fa-solid fa-house",
+      name: "Tasks"
+    },
+    {
+      icon: "fa-regular fa-star",
+      name: "Important",
+    }
+  ]
 
   constructor(
     private taskService: TaskService,
