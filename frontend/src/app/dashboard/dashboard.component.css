@@ -1,14 +1,10 @@
 .col-4{
-  min-height: max-content;
+  height: 522px;
   border: 1px solid gray;
 }
 .col-8{
-  min-height: max-content;
   border: 1px solid gray;
 }
 a:hover{
   background-color: lightgray;
-}
-#newList{
-  margin-top: 70%;
 }
