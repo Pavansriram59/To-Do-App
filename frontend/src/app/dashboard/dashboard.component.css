@@ -1,5 +1,5 @@
 .col-4{
-  height: 522px;
+  height: 524px;
   border: 1px solid gray;
 }
 .col-8{
@@ -7,4 +7,13 @@
 }
 a:hover{
   background-color: lightgray;
+}
+
+.newList:hover{
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.selected{
+  background-color: gray;
 }
