@@ -29,10 +29,10 @@ export class TaskService {
   }
 
   public deleteTask(listId: string, taskId: string) {
-    return this.webService.delete(`lists/${listId}/tasks/${taskId}`)
+    return this.webService.delete(`dashboard/lists/${listId}/tasks/${taskId}`)
   }
 
   public setCompleted(listId: string, task: Task) {
-    return this.webService.patch(`lists/${listId}/tasks/${task._id}`, { completed: !task.completed });
+    return this.webService.patch(`dashboard/lists/${listId}/tasks/${task._id}`, { completed: !task.completed });
   }
 }

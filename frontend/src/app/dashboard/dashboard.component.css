@@ -8,12 +8,13 @@
 a:hover{
   background-color: lightgray;
 }
-
-.newList:hover{
+p:hover{
   cursor: pointer;
-  background-color: lightgray;
 }
-
 .selected{
   background-color: gray;
+}
+.completed{
+  text-decoration: line-through;
+  opacity: 0.8;
 }

@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   tasks: Task[] = [];
   listId: any;
   listName!: string;
+  taskName!: string;
 
   dashboardItems: items[] = [
     {
@@ -39,25 +40,25 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getLists()
       .subscribe((lists: any) => this.lists = lists);
+
     this.route.params.subscribe((params:Params) => {
       this.listId = params['listId'];
       if (!this.listId) return;
-      this.taskService.getTasks(params['listId']).subscribe((tasks: any) => this.tasks = tasks);
+      this.taskService.getTasks(this.listId).subscribe((tasks: any) => this.tasks = tasks);
     })
   }
 
-  // isSelected(selectedListId: any): boolean {
-  //   return this.listId === selectedListId;
-  // }
   addList(): any {
     this.taskService.createList(this.listName)
-      .subscribe((list: any) => {
-        this.lists.push(list);
-      })
+      .subscribe((list: any) => this.lists.push(list) )
   }
 
+  addTask(): any{
+    this.taskService.createTask(this.listId, this.taskName)
+      .subscribe((task: any) => this.tasks.push(task))
+  }
 
-  onTaskClick(task: any) {
+  onTaskClick(task: Task) {
     this.taskService.setCompleted(this.listId, task).subscribe(
       () => task.completed = !task.completed
     );

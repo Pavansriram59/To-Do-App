@@ -28,44 +28,41 @@
         </div>
         <hr>
 
-        <div *ngFor="let list of lists" class="newList rounded-3 my-2">
-          <a class="btn border-0 fs-5" type="button" [routerLink]="['/dashboard/lists',list._id]" >
+        <ng-container *ngFor="let list of lists">
+          <a class="btn border-0 fs-5" [routerLink]="['/dashboard/lists',list._id,'tasks']" routerLinkActive="selected">
             <i class="fa-solid fa-bars"></i>  {{list.title}}
           </a>
-        </div>
+        </ng-container>
 
         <div class="input-group mb-3">
           <a class="btn btn" id="listBtn" [routerLink]="['/dashboard/lists']" (click)="addList()"><i class="fa-solid fa-plus"></i></a>
-          <input type="text" class="form-control" placeholder="New List" data-bs-toggle="tooltip"
-          data-bs-placement="top" data-bs-title="Add a new list" [(ngModel)]="listName">
+          <input type="text" class="form-control" placeholder="New List" [(ngModel)]="listName">
         </div>
       </div>
 
       <div class="col-8 rounded-4">
         <div class="container-fluid">
           <ng-container *ngIf="tasks.length>0; else elseBlock">
-            <ng-container *ngFor="let task of tasks" [style.color]="task.completed ? 'red' :'white'">
-              <p>{{task.title}}</p>
-            </ng-container>
+            <h2>Tasks</h2>
+            <div *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{'completed':task.completed}">
+              <p class="bg-body-secondary px-3 py-2 rounded-3" >{{task.title}}</p>
+            </div>
           </ng-container>
 
           <ng-template #elseBlock>
             <h2 class="text-center">No Tasks are added yet!</h2>
           </ng-template>
 
+          <div class="input-group mb-3">
+            <a class="btn " id="taskBtn" [routerLink]="['/dashboard/lists',listId,'tasks']" (click)="addTask()"><i
+                class="fa-solid fa-plus"></i></a>
+            <input type="text" class="form-control" placeholder="New Task" [(ngModel)]="taskName" id="taskVal">
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <div class="container-fluid">
-    <h3 *ngIf="tasks.length>0">Tasks</h3>
-    <button *ngFor="let task of tasks" class="btn btn-secondary d-block m-3" (click)="onTaskClick(task)"
-      [style.color]="task.completed ? 'red' :'white'">
-      {{task.title}}
-    </button>
-  </div>
 </body>
 
 </html>
