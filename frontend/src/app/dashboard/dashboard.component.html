@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <div class="container-fluid overflow-hidden">
+  <div class="container-fluid overflow-x-hidden">
     <div class="row g-3 p-2">
       <div class="col-4 p-2 rounded-4">
         <h2><i class="fa-solid fa-clipboard-check"></i> To-Do List</h2>
@@ -30,15 +30,15 @@
 
         <ng-container *ngFor="let list of lists">
           <div>
-            <a class="btn border-0 fs-5" [routerLink]="['/dashboard/lists',list._id,'tasks']" routerLinkActive="selected">
+            <a class="btn border-0" id="listBtn" [routerLink]="['/dashboard/lists',list._id,'tasks']" routerLinkActive="selected">
               <i class="fa-solid fa-bars"></i>  {{list.title}}
             </a>
-            <a class="btn btn-danger rounded-5" (click)="deleteList(list)"><i class="fa-solid fa-trash"></i></a>
+            <a class="btn btn-sm rounded-5" (click)="deleteList(list)"><i class="fa-solid fa-trash"></i></a>
           </div>
         </ng-container>
 
         <div class="input-group mb-3">
-          <a class="btn btn" id="listBtn" [routerLink]="['/dashboard/lists']" (click)="addList()"><i class="fa-solid fa-plus"></i></a>
+          <a class="btn" [routerLink]="['/dashboard/lists']" (click)="addList()"><i class="fa-solid fa-plus"></i></a>
           <input type="text" class="form-control" placeholder="New List" [(ngModel)]="listName">
           <a class="btn input-group-text" (click)="clearInputList()"><i class="fa-regular fa-circle-xmark"></i></a>
         </div>
@@ -47,15 +47,17 @@
       <div class="col-8 rounded-4">
         <div class="container-fluid">
           <ng-container *ngIf="tasks.length>0; else elseBlock">
-            <h2>Tasks</h2>
-            <div *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{'completed':task.completed}">
-              <p class="bg-body-secondary px-3 py-2 rounded-3" >{{task.title}}</p>
-              <button class="btn btn-danger rounded-5" (click)="deleteTask(task)"><i class="fa-solid fa-trash"></i></button>
-            </div>
+            <h2 class="py-2">Tasks</h2>
+            <ng-container *ngFor="let task of tasks">
+              <div (click)="onTaskClick(task)" [ngClass]="{'completed':task.completed}" class="Tasks bg-body-secondary rounded-3 my-2">
+                <p class="px-3 py-2 rounded-3" >{{task.title}}</p>
+                <button class="btn btn-sm rounded-5" (click)="deleteTask(task)"><i class="fa-solid fa-trash"></i></button>
+              </div>
+            </ng-container>
           </ng-container>
 
           <ng-template #elseBlock>
-            <h2 class="text-center">No Tasks are added yet!</h2>
+            <h2 class="text-center py-2">No Tasks are added yet!</h2>
           </ng-template>
 
           <div class="input-group mb-3">
