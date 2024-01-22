@@ -54,9 +54,10 @@
           </ng-template>
 
           <div class="input-group mb-3">
-            <a class="btn " id="taskBtn" [routerLink]="['/dashboard/lists',listId,'tasks']" (click)="addTask()"><i
-                class="fa-solid fa-plus"></i></a>
+            <a class="btn input-group-text" [routerLink]="['/dashboard/lists',listId,'tasks']" (click)="addTask()"><i
+                class="fa-solid fa-circle-plus"></i></a>
             <input type="text" class="form-control" placeholder="New Task" [(ngModel)]="taskName" id="taskVal">
+            <a class="btn input-group-text" (click)="clearInput()"><i class="fa-regular fa-circle-xmark"></i></a>
           </div>
         </div>
       </div>

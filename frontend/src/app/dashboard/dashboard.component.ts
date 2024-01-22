@@ -63,4 +63,8 @@ export class DashboardComponent implements OnInit {
       () => task.completed = !task.completed
     );
   }
+
+  clearInput() {
+    this.taskName = '';
+  }
 }
