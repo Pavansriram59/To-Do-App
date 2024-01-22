@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.getLists()
       .subscribe((lists: any) => this.lists = lists);
 
-    this.route.params.subscribe((params:Params) => {
+    this.route.params.subscribe((params: Params) => {
       this.listId = params['listId'];
       if (!this.listId) return;
       this.taskService.getTasks(this.listId).subscribe((tasks: any) => this.tasks = tasks);
@@ -50,10 +50,10 @@ export class DashboardComponent implements OnInit {
 
   addList(): any {
     this.taskService.createList(this.listName)
-      .subscribe((list: any) => this.lists.push(list) )
+      .subscribe((list: any) => this.lists.push(list))
   }
 
-  addTask(): any{
+  addTask(): any {
     this.taskService.createTask(this.listId, this.taskName)
       .subscribe((task: any) => this.tasks.push(task))
   }
@@ -64,7 +64,19 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  clearInput() {
+  deleteTask(task: Task) {
+    this.taskService.deleteTask(this.listId, task._id)
+      .subscribe((task: any) => this.tasks = this.tasks.filter(t => t._id != task._id))
+  }
+
+  deleteList(list: List) {
+    this.taskService.deleteList(list._id)
+      .subscribe(() => this.lists = this.lists.filter(l => l._id != list._id))
+  }
+  clearInputList() {
+    this.listName = '';
+  }
+  clearInputTask() {
     this.taskName = '';
   }
 }

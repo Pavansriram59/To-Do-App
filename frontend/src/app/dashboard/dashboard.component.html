@@ -29,14 +29,18 @@
         <hr>
 
         <ng-container *ngFor="let list of lists">
-          <a class="btn border-0 fs-5" [routerLink]="['/dashboard/lists',list._id,'tasks']" routerLinkActive="selected">
-            <i class="fa-solid fa-bars"></i>  {{list.title}}
-          </a>
+          <div>
+            <a class="btn border-0 fs-5" [routerLink]="['/dashboard/lists',list._id,'tasks']" routerLinkActive="selected">
+              <i class="fa-solid fa-bars"></i>  {{list.title}}
+            </a>
+            <a class="btn btn-danger rounded-5" (click)="deleteList(list)"><i class="fa-solid fa-trash"></i></a>
+          </div>
         </ng-container>
 
         <div class="input-group mb-3">
           <a class="btn btn" id="listBtn" [routerLink]="['/dashboard/lists']" (click)="addList()"><i class="fa-solid fa-plus"></i></a>
           <input type="text" class="form-control" placeholder="New List" [(ngModel)]="listName">
+          <a class="btn input-group-text" (click)="clearInputList()"><i class="fa-regular fa-circle-xmark"></i></a>
         </div>
       </div>
 
@@ -46,6 +50,7 @@
             <h2>Tasks</h2>
             <div *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{'completed':task.completed}">
               <p class="bg-body-secondary px-3 py-2 rounded-3" >{{task.title}}</p>
+              <button class="btn btn-danger rounded-5" (click)="deleteTask(task)"><i class="fa-solid fa-trash"></i></button>
             </div>
           </ng-container>
 
@@ -57,7 +62,7 @@
             <a class="btn input-group-text" [routerLink]="['/dashboard/lists',listId,'tasks']" (click)="addTask()"><i
                 class="fa-solid fa-circle-plus"></i></a>
             <input type="text" class="form-control" placeholder="New Task" [(ngModel)]="taskName" id="taskVal">
-            <a class="btn input-group-text" (click)="clearInput()"><i class="fa-regular fa-circle-xmark"></i></a>
+            <a class="btn input-group-text" (click)="clearInputTask()"><i class="fa-regular fa-circle-xmark"></i></a>
           </div>
         </div>
       </div>
