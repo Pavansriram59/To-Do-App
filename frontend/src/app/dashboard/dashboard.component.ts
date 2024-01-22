@@ -13,7 +13,6 @@ import ObjectID from 'bson-objectid';
 export class DashboardComponent implements OnInit {
   lists: List[] = [];
   tasks: Task[] = [];
-  list: any;
   listId: any;
   listName!: string;
 
@@ -40,23 +39,21 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getLists()
       .subscribe((lists: any) => this.lists = lists);
-
-  }
-
-  isSelected(selectedListId:any): boolean {
-    return this.listId=== selectedListId;
-  }
-  addList(): any {
-    this.taskService.createList(this.listName)
-      .subscribe((l) => {
-        console.log(l);
-    });
-
-    this.route.paramMap.subscribe((params: Params) => {
+    this.route.params.subscribe((params:Params) => {
       this.listId = params['listId'];
       if (!this.listId) return;
-      this.taskService.getTasks(this.listId).subscribe((tasks: any) => this.tasks = tasks);
+      this.taskService.getTasks(params['listId']).subscribe((tasks: any) => this.tasks = tasks);
     })
+  }
+
+  // isSelected(selectedListId: any): boolean {
+  //   return this.listId === selectedListId;
+  // }
+  addList(): any {
+    this.taskService.createList(this.listName)
+      .subscribe((list: any) => {
+        this.lists.push(list);
+      })
   }
 
 

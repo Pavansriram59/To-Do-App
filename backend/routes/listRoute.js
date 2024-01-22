@@ -21,7 +21,7 @@ router.post("/lists", (req, res) => {
 
 // ! Getting a specific list
 router.get("/lists/:listId", (req, res) => {
-  List.find({ _id: req.params.listId })
+  List.find({ _id: (req.params.listId) })
     .then((list) => res.send(list))
     .catch((error) => console.log(error));
 });

@@ -11,7 +11,7 @@ import { WebApiService } from './web-api.service';
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,
